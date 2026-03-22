@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+from unittest import result
 import numpy as np  # pip install numpy
 
 class MatrixApp:
@@ -89,25 +90,31 @@ class MatrixApp:
         result = A + B
         self.show_result(result)
     def det_A(self):
-        A = self.get_matrix(self.entries_A)
-        if A is None:
-            return
-        if A.shape[0] != A.shape[1]:
-            messagebox.showerror("Error", "Matrix must be square for determinant!")
-            return
-        n = A.shape[0]
-        
-        if n == 1:
-            result = A[0,0]
-        elif n == 2:
-            result = self.det_2x2(A)
-        elif n == 3:
-            result = self.det_3x3(A)
-        else:
-            messagebox.showerror("Error", "Only 1×1, 2×2, 3×3 supported for now!")
-            return
-        self.show_result(f"det(A) = {result:.6f}")
-        
+            A = self.get_matrix(self.entries_A)
+            if A is None:
+                return
+            
+            rows, cols = A.shape
+            if rows != cols:
+                messagebox.showerror("Error", "Matrix must be square for determinant!")
+                return
+            
+            if rows == 1:
+                result = A[0,0]
+            elif rows == 2:
+                result = self.det_2x2(A)
+            elif rows == 3:
+                result = self.det_3x3_sarrus(A)     # or self.det_3x3_cofactor(A)
+            else:
+                messagebox.showerror("Error", "Only 1×1, 2×2, 3×3 supported with basic NumPy")
+                return
+                self.show_result(f"det(A) = {result:.4f}")
+    # Optional: color feedback
+            if abs(result) < 1e-8:
+                self.result_text.tag_add("singular", "1.0", "end")
+                self.result_text.tag_config("singular", foreground="red")
+            else:
+                self.result_text.tag_config("singular", foreground="#0f0")
     def show_result(self, mat):
         self.result_text.delete(1.0, tk.END)
         self.result_text.insert(tk.END, "Result:\n" + str(mat))
