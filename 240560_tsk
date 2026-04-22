@@ -1,0 +1,67 @@
+# from sympy import symbols
+# p, q = symbols('p q')
+# print("AND:", p & q)
+# print("OR:", p | q)
+# print("NOT:", ~p)
+
+# from sympy import symbols, Implies, simplify
+# p, q = symbols('p q')
+# expr = Implies(p, q)
+# print("Expression:", expr)
+# print("Simplified:", simplify(expr))
+
+# from streamlit import stop
+# from sympy import symbols, Function
+# x = symbols('x')
+# Human = Function('Human')
+# print(Human(x))
+
+# def is_mortal(human2):
+#     if human2 == "Socrates":
+#         return True
+#     return False
+# print("Socrates is mortal:", is_mortal("Socrates"))
+
+
+
+# TASK 1:
+
+# Create logical agent for:
+#  Traffic light system
+
+# def traffic_light_system(color):
+#     if color == "red":
+#         return stop
+#     elif color == "yellow":
+#         return "Prepare to stop"
+#     elif color == "green":
+#         return "Go"
+#     else:
+#         return "Invalid color"
+# # Example:
+# print(traffic_light_system("red"))    
+# print(traffic_light_system("yellow")) 
+# print(traffic_light_system("green"))  
+# print(traffic_light_system("blue"))   
+
+# TASK 2:
+
+# Implement:
+#  (p AND q) OR NOT p
+
+from sympy import symbols
+# p, q = symbols('p q')
+# expr = (p & q) | ~p
+# print("Expression:", expr)
+
+# TASK 3:
+
+# Write predicate logic for:
+#  Student(x)
+#  Pass(x)
+from sympy import symbols, Function
+x = symbols('x')
+Student = Function('Student')
+Pass = Function('Pass')
+print("Student(x):", Student(x))
+print("Pass(x):", Pass(x))
