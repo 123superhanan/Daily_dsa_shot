@@ -1,6 +1,9 @@
 
 #array
 
+from sympy import total_degree
+
+
 nums = [1, 2, 3, 4, 5,5]
 for num in nums:
     print(num)
@@ -46,13 +49,57 @@ while left < right:
 print("Reversed array:", nums)
 
 #sliding window approach to find maximum sum of subarray of size k
+k = 3
+windoe_sum = sum(nums[:k])
+print("Initial window sum:", windoe_sum)
+
+#running sum
+total = 0
+for num in nums:
+    total += num
+print("Running sum:", total)
 
 
+trget = 5
+for i,num in enumerate(nums):
+    if(num == trget):
+        print("Target found at index:", i)
+        
+
+#duplicte elements in array
+seen = set()
+for num in nums:
+    if num in seen:
+        print(True)
+        break
+    seen.add(num)
 
 
+#condition bsed move 
+# rerrnge elements
+# move all zeroes to end of array
+#example: [0,1,0,3,12] -> [1,3,12,0,0]
 
+nums_two = [0,1,0,3,12]
+non_zero_index = 0
+for i in range(len(nums_two)):
+    if nums_two[i] != 0:
+        nums_two[non_zero_index], nums_two[i] = nums_two[i], nums_two[non_zero_index]
+        non_zero_index += 1
+print("Array after moving zeroes:", nums_two)
 
+#subarray problems
+#find maximum sum of subarray of size k
+#exp : [1,2,3,4,5], k=3 -> 12 (3+4+5)
 
+k=3
+max_sum = 0
+for i in range(len(nums)-k+1):
+    window_sum = 0
+    for j in range(i, i+k):
+        window_sum += nums[j]
+    max_sum = max(max_sum, window_sum)
+print("Maximum sum of subarray of size k:", max_sum)
 
 
 
